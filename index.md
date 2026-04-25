@@ -1,13 +1,3 @@
-# Task (prompt)
-
-I have prplOS clients in the lab connected to Cisco LAC and LNS. I can ping from prplOS to LAC but I can't ping between prplOS clients neither can I ping from LNS to any client. What could be the root cause?
-
----
-
-The prompt was intentionally not overly specific to mimic real world prompts. It also allows neutral start, not prefocusing LLM into a specific reasoning path. With neutral start, it's interesting to compare abilities of LLMs to encount potential root causes and select or sort them in probability given the described cirmustances. One can see the difference in how individual LLM work with cues and side information given in the prompt.
-
-# LLM responses
-
 ### Comparison Index
 * [Qwen3.6-Max-Preview](#qwen36-max-preview)
 * [Qwen3.6-27B](#qwen36-27b)
@@ -27,7 +17,39 @@ The prompt was intentionally not overly specific to mimic real world prompts. It
 * [Nemotron 3 Super](#nemotron-3-super)
 * [Mistral](#mistral)
 
-  
+# Task (prompt)
+
+I have prplOS clients in the lab connected to Cisco LAC and LNS. I can ping from prplOS to LAC but I can't ping between prplOS clients neither can I ping from LNS to any client. What could be the root cause?
+
+---
+
+The prompt was intentionally not overly specific to mimic real world prompts. It also allows neutral start, not prefocusing LLM into a specific reasoning path. With neutral start, it's interesting to compare abilities of LLMs to encount potential root causes and select or sort them in probability given the described cirmustances. One can see the difference in how individual LLM work with cues and side information given in the prompt.
+
+# Results
+
+| LLM Name | Score | Remarks |
+| --- | --- | --- | 
+| Qwen3.6-Max-Preview | 3 | Missed actual cause. Provided other plausible root causes. Lost points for non-plausible causes. |
+| Qwen3.6-27B | N/A | Found root cause in top 3 suspects. Provided other plausible root causes. |
+| Qwen3-Coder | 2 | Missed actual cause. Lost points for non-plausible root causes (Hairpinning/NAT). |
+| Gemini 3 Flash Preview | N/A | Found root cause as the 1st suspect. Provided other plausible root causes. | 
+| Gemma 4 31B IT | N/A | Found root cause as the 1st suspect. Provided other plausible root causes. | 
+| gpt-5.5 | N/A | Found root cause as the 1st suspect. Lost points for non-plausible root causes. | 
+| gpt-5.3-chat-latest | 3 | Missed actual cause. Provided other plausible root causes. Lost points for non-plausible causes. | 
+| gpt-5.3-codex | 2 | Missed actual cause. Lost points for non-plausible root causes. |
+| gpt-4.1-nano | 1 | Missed actual cause. Lost points for non-plausible root causes. |
+| gpt-5.4-mini | 2 | Missed actual cause. Lost points for non-plausible root causes. |
+| o1-pro | 0 | Missed actual cause. Lost points for non-plausible root causes. |
+| Sonet-4.6 | 4 | Missed actual cause. Provided other plausible root causes. |
+| Opus 4.7 | N/A | Found root cause as the 1st suspect. Provided other plausible root causes. | 
+| Grok Code Fast 1 | N/A | Found root cause in top 3 suspects. Lost points for non-plausible causes. |
+| Gwen3 Coder Next | 1 | Missed actual cause. Lost points for non-plausible root causes. |
+| LLama4 Maverick 17B | 1 | Missed actual cause. Lost points for non-plausible root causes. |
+| Nemotron 3 Super | 3 | Identified firewall (late). Lost points for non-plausible root causes. |
+| Mistral | 1 | Identified firewall (late). Lost points for non-plausible root causes. |
+
+# LLM responses
+
 ## Qwen3.6-Max-Preview
 
 This is a classic L2TP/IPsec troubleshooting scenario. The fact that **prplOS clients can ping the LNS** but **cannot ping each other** and **the LNS cannot ping the clients** points to specific routing, firewall, or L2TP configuration issues.
@@ -253,25 +275,25 @@ Start by verifying routes on the LNS and checking prplOS firewall rules.
 
 Based on your L2TP (LAC/LNS) setup with prplOS clients, the issue where you can ping from prplOS to LNS but not between clients or from LNS to clients suggests a **layer 3 routing/forwarding problem** within the L2TP tunnel. Here are the most likely root causes:
 
-## 1. **IP Addressing Issues**
+### 1. **IP Addressing Issues**
 - **Subnet mismatch**: The prplOS clients may not be getting IP addresses in the same subnet as configured on the LNS
 - **Incorrect IP pool**: The LNS may not be assigning addresses from the correct range for client-to-client communication
 
-## 2. **LNS Routing Configuration**
+### 2. **LNS Routing Configuration**
 - **Client-to-client routing disabled**: Many LNS implementations disable direct client communication by default for security
 - **Missing static routes**: The LNS may not have routes to forward traffic between different client sessions
 - **Split tunneling configuration**: May be routing only to specific destinations, not other clients
 
-## 3. **Forwarding/Security Restrictions**
+### 3. **Forwarding/Security Restrictions**
 - **Intra-tunnel traffic blocked**: Some LNS configurations explicitly block traffic between L2TP sessions
 - **Access control lists**: ACLs on the LNS may prevent client-to-client communication
 - **Firewall rules**: Security policies may be blocking internal tunnel traffic
 
-## 4. **Layer 2 vs Layer 3 Issues**
+### 4. **Layer 2 vs Layer 3 Issues**
 - **Bridging vs Routing**: If expecting layer 2 connectivity between clients, ensure the LNS supports L2 bridging across tunnels
 - **ARP resolution**: Clients may not be able to resolve each other's MAC addresses across the tunnel
 
-## Troubleshooting Steps:
+### Troubleshooting Steps:
 1. Check IP addressing of all prplOS clients and LNS interfaces
 2. Verify LNS configuration allows client-to-client communication
 3. Examine routing table on LNS for client subnets
@@ -620,7 +642,6 @@ Would you be able to provide:
 
 This info could help diagnose more precisely.
 
-
 ---
 
 
@@ -676,7 +697,7 @@ In other words:
 
 This is a classic L2TP/PPPoE topology issue. Based on your description — one-directional reachability (prplOS → LNS works, but LNS → prplOS and client-to-client fail) — here are the most likely root causes:
 
-## 1. Proxy ARP / ARP not being forwarded (Most Likely)
+### 1. Proxy ARP / ARP not being forwarded (Most Likely)
 
 The LNS needs to know how to reach the PPP client addresses. In L2TP, the LNS assigns IPs to clients but may not have proper ARP or routing entries back to them.
 
@@ -684,39 +705,39 @@ The LNS needs to know how to reach the PPP client addresses. In L2TP, the LNS as
 - Client IP addresses may not be installed as **host routes** (`/32`) on the LNS after PPP negotiation
 - Check: `show ip route` on LNS — are client-assigned IPs present as connected/host routes?
 
-## 2. IP Routing Not Configured on LNS for Client Pool
+### 2. IP Routing Not Configured on LNS for Client Pool
 
 The LNS knows the client IPs (it assigned them), but the **return path routing** may be missing or pointing to the wrong interface.
 
 - Verify the IP pool assigned to PPP sessions has routes pointing **into the virtual-template/tunnel interface**, not out a physical interface
 - Check: `show ip interface virtual-access X` to confirm client IP binding
 
-## 3. Client-to-Client Traffic Hairpinning Not Enabled
+### 3. Client-to-Client Traffic Hairpinning Not Enabled
 
 PPP clients behind the same LNS typically can't communicate directly because:
 
 - Traffic goes **prplOS → LAC → LNS** but the LNS drops or doesn't **hairpin** the packet back down another L2TP tunnel to the other client
 - Cisco IOS LNS does **not** hairpin by default — you need either a routing trick or `ip unnumbered` with proper connected routes
 
-## 4. Reverse Path Forwarding (uRPF) Dropping Return Traffic
+### 4. Reverse Path Forwarding (uRPF) Dropping Return Traffic
 
 If uRPF is enabled on the LNS tunnel or WAN interface:
 
 - Packets sourced from client IPs arriving on an unexpected interface get silently dropped
 - Check: `show interface virtual-template X | include verify` or `ip verify unicast source`
 
-## 5. PPP IPCP Negotiation Asymmetry
+### 5. PPP IPCP Negotiation Asymmetry
 
 - Confirm the client IP and DNS were successfully negotiated end-to-end: `debug ppp negotiation` on LNS
 - A partial IPCP negotiation can result in the client having an IP but the LNS not installing the return route
 
-## 6. ACL or Firewall on Virtual-Template Blocking Inbound
+### 6. ACL or Firewall on Virtual-Template Blocking Inbound
 
 - An ACL applied to the `virtual-template` interface may permit outbound (client-initiated) but block inbound (LNS-initiated) ICMP
 - Check: `show ip interface virtual-template X | include access list`
 
 
-## Quick Diagnostic Checklist
+### Quick Diagnostic Checklist
 
 | Check | Command |
 |---|---|
@@ -739,11 +760,11 @@ Cost: $0.059385
 Duration: 23.2s
 ```
 
-# Root Cause Analysis: Asymmetric Reachability over L2TP
+### Root Cause Analysis: Asymmetric Reachability over L2TP
 
 The symptom pattern (outbound works, inbound and lateral don't) is a classic signature of **ingress filtering on the PPP/WAN interface combined with the point-to-point nature of L2TP sessions**.
 
-## Most Likely Root Cause: prplOS Firewall Blocking Ingress on `ppp` Interface
+### Most Likely Root Cause: prplOS Firewall Blocking Ingress on `ppp` Interface
 
 On prplOS, the PPP interface created by the L2TP client is placed in the **`wan` firewall zone** by default. That zone has:
 
@@ -772,7 +793,7 @@ iptables -I FORWARD -i ppp+ -j ACCEPT
 
 If ping from LNS starts working immediately, the firewall is confirmed as the cause.
 
-## Second Contributor: Cisco LNS Inter-Session Forwarding
+### Second Contributor: Cisco LNS Inter-Session Forwarding
 
 Even after opening the firewall, **client-to-client** traffic needs the LNS to forward between two separate PPP sessions. Two common misconfigurations:
 
@@ -794,7 +815,7 @@ show interface Virtual-Access<n>  | include proxy
 
 You should see a `/32` host route per connected client pointing at its own `Virtual-Accessx` interface. If those routes are missing → routing/PPP config issue. If they exist but traffic still fails → proxy-ARP or ACL.
 
-## Third Thing to Check: MTU / MSS (not your current symptom, but will bite you)
+### Third Thing to Check: MTU / MSS (not your current symptom, but will bite you)
 
 L2TP+PPP overhead shrinks effective MTU to ~1460 or less. Ping works (small packets) but TCP sessions hang. Configure:
 
@@ -802,24 +823,24 @@ L2TP+PPP overhead shrinks effective MTU to ~1460 or less. Ping works (small pack
 ppp-mss-clamp 1400   # or similar on the LNS Virtual-Template
 ```
 
-## Recommended Troubleshooting Order
+### Recommended Troubleshooting Order
 
 1. **Packet capture on the prplOS client's `ppp0`** while LNS pings it:
-   ```sh
-   tcpdump -ni ppp0 icmp
-   ```
-   - If echo-requests **arrive** but no reply → firewall INPUT drop (confirmed).
-   - If echo-requests **don't arrive** → problem is on LNS side (routing/uRPF/ACL).
+```sh
+tcpdump -ni ppp0 icmp
+```
+- If echo-requests **arrive** but no reply → firewall INPUT drop (confirmed).
+- If echo-requests **don't arrive** → problem is on LNS side (routing/uRPF/ACL).
 
 2. Repeat for client-to-client: capture on both `ppp0` interfaces simultaneously to see where the packet disappears.
 
 3. Apply the corresponding fix from the tables above.
 
-## Summary
+### Summary
 
-> **Primary cause:** prplOS's default `wan` firewall zone drops ingress and forward traffic on the `ppp` interface — this blocks LNS→client and client→client flows while leaving client→LNS intact.
->
-> **Secondary cause (for inter-client only):** the Cisco LNS may need `ip proxy-arp` on the Virtual-Template, or have uRPF/ACL that blocks forwarding between PPP sessions.
+- **Primary cause:** prplOS's default `wan` firewall zone drops ingress and forward traffic on the `ppp` interface — this blocks LNS→client and client→client flows while leaving client→LNS intact.
+
+- **Secondary cause (for inter-client only):** the Cisco LNS may need `ip proxy-arp` on the Virtual-Template, or have uRPF/ACL that blocks forwarding between PPP sessions.
 
 Start with the `tcpdump` on `ppp0` — it will tell you in 10 seconds whether the issue is on the prplOS side or the Cisco side.
 
@@ -1330,7 +1351,6 @@ When prplOS clients can ping the LNS (L2TP Network Server) but cannot ping each 
 - Start with checking the L2TP session status and routes on the LNS.
 - Verify NAT and firewall rules.
 - If possible, share the output of the debugging commands for further analysis.
-
 
 
 ---
