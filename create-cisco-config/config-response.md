@@ -1,4 +1,4 @@
-# Prompt 
+# Prompt 
 
 Create a working, fully functional production grade Cisco IOS-XE 17 configuration of a router ISR8000 which can be copy pasted into a production device.
 
@@ -15,7 +15,7 @@ Properties
 
 # Responses
 
-## gpt-5.3-chat
+## gpt-5.3-chat
 
 ```cisco
 hostname ISR8000
