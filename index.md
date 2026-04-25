@@ -1,10 +1,12 @@
-# Task
+# Task (prompt)
 
 I have prplOS clients in the lab connected to Cisco LAC and LNS. I can ping from prplOS to LAC but I can't ping between prplOS clients neither can I ping from LNS to any client. What could be the root cause?
 
 ---
 
-# LLM responses
+The prompt was intentionally not overly specific to mimic real world prompts. It also allows neutral start, not prefocusing LLM into a specific reasoning path. With neutral start, it's interesting to compare abilities of LLMs to encount potential root causes and select or sort them in probability given the described cirmustances. One can see the difference in how individual LLM work with cues and side information given in the prompt.
+
+# LLM responses
 
 ## Qwen3.6-Max-Preview
 
