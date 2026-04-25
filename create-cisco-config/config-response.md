@@ -17,6 +17,7 @@ Properties
 
 ## gpt-5.3-chat
 
+```cisco
 hostname ISR8000
 no ip domain-lookup
 ip domain name lab.local
@@ -466,7 +467,7 @@ write memory
 
 ## Opus 4.7
 
-# Cisco IOS-XE 17 Production Configuration - ISR8000
+Cisco IOS-XE 17 Production Configuration - ISR8000
 
 Below is a production-grade configuration for a Cisco ISR8000 router running IOS-XE 17.x. Review all placeholders (hostnames, keys, ACLs, prefix-lists) before deploying.
 
@@ -927,12 +928,9 @@ archive
 end
 ```
 
----
+### Deployment Notes
 
-## Deployment Notes
-
-<details>
-<summary><b>⚠️ Pre-deployment checklist (must-read)</b></summary>
+⚠️ Pre-deployment checklist (must-read)
 
 1. **Replace all placeholders** marked with `<...>`:
    - `<ENABLE_SECRET_HASH>`, `<ADMIN_SECRET_HASH>` → generate with `enable algorithm-type scrypt secret <pwd>`
@@ -942,19 +940,15 @@ end
 3. **Adjust `MGMT-ACL`** to your real management subnet(s).
 4. **Public IPs used** (`20.0.0.1/30`, `30.0.0.1/30`) are in real-world public space — ensure these are the actual ranges assigned by your ISPs.
 5. The ISR8000 series uses names like `GigabitEthernet0/0/0` in some variants. If your platform uses three-tier notation, replace `Gi0/0`, `Gi0/1`, `Gi0/3` accordingly.
-</details>
 
-<details>
-<summary><b>🎯 Traffic engineering logic</b></summary>
+🎯 Traffic engineering logic
 
 - **Primary (ISP-A)** is preferred for **outbound** via `local-preference 200` vs. `100` on ISP-B.
 - **Inbound preference** toward ISP-A is signaled by **AS-path prepending** 3× on ISP-B advertisements, making ISP-A a shorter path for return traffic.
 - The `bandwidth` statement on each WAN influences OSPF/EIGRP cost calculations and NetFlow accounting; the QoS `shape` enforces actual contracted rates.
 - `max-metric router-lsa on-startup wait-for-bgp` prevents transit blackholing during reloads until BGP converges.
-</details>
 
-<details>
-<summary><b>✅ Verification commands</b></summary>
+✅ Verification commands
 
 ```cisco
 show ip interface brief
@@ -968,12 +962,13 @@ show logging | include 2000:DEAD
 show policy-map interface GigabitEthernet0/0
 show control-plane host open-ports
 ```
-</details>
+
 
 ---
 
 ## Qwen3.6-Plus
 
+```cisco
 ! ==========================================
 ! ISR8000 Production Configuration - IOS-XE 17.x
 ! ==========================================
@@ -1138,13 +1133,11 @@ line vty 0 15
  login authentication default
 !
 end
+```
 
 ---
 
 ## Gemini 3.1 Pro Preview
-
-
-
 
 
 Here is a complete, production-grade configuration for a Cisco Catalyst 8000 Edge Platform (IOS-XE 17). 
@@ -1530,6 +1523,7 @@ Pings the ISP next-hop every 10 seconds, with a 15s/10s down/up dampening delay 
 crypto key generate rsa modulus 4096 label SSH-RSA
 ```
 
+```cisco
 ! ============================================================
 ! Cisco IOS-XE 17 — ISR 8000 Production Configuration
 ! ============================================================
@@ -2016,6 +2010,7 @@ no ip gratuitous-arps
 ! END OF CONFIGURATION
 ! ============================================================
 end
+```
 
 ---
  

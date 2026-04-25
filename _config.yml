@@ -1,5 +1,5 @@
 remote_theme: pages-themes/midnight
-title: Network - LLM Comparison
-description: Comparison of LLMs with networking troubleshooting task
+title: Networking - LLM Comparison
+description: Comparison of LLMs with networking tasks
 plugins:
 - jekyll-remote-theme
