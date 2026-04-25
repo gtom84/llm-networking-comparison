@@ -1,3 +1,5 @@
+[ToC]
+
 # Task (prompt)
 
 I have prplOS clients in the lab connected to Cisco LAC and LNS. I can ping from prplOS to LAC but I can't ping between prplOS clients neither can I ping from LNS to any client. What could be the root cause?
@@ -122,8 +124,7 @@ Start by checking the LNS firewall and enabling proxy ARP.
 
 ---
 
-## Qwen3.6-27B
-
+## Qwen3.6-27B
 
 This is a classic L2TPv3 or IPsec over GRE (common in prplOS/Cisco lab setups) troubleshooting scenario. The fact that you can ping **from prplOS to the LNS** but not **between clients** or **from LNS to clients** points to specific asymmetries or configuration gaps.
 
@@ -259,7 +260,7 @@ The fact that you can ping LNS → client but not client ↔ client strongly ind
 
 ---
 
-## Gemini 3 Flash Preview
+## Gemini 3 Flash Preview
 
 ```
 Input tokens: 57
@@ -311,7 +312,7 @@ Even if the LNS has the sessions up, it needs a valid route in its routing table
 
 ---
 
-## Gemma 4 31B IT
+## Gemma 4 31B IT
 
 ```
 Input tokens: 57
@@ -375,7 +376,7 @@ Log into the prplOS clients and completely disable the firewall. If pings start 
 
 ---
 
-## gpt-5.5
+## gpt-5.5
 
 ```
 Input tokens: 61
@@ -683,7 +684,7 @@ If uRPF is enabled on the LNS tunnel or WAN interface:
 
 ---
 
-## Opus 4.7
+## Opus 4.7
 
 ```
 Token count: 2312 tokens
@@ -1201,7 +1202,7 @@ Let me know your LNS config snippet (virtual-template, ip local pool, vpdn group
 
 ---
 
-## Mistral
+## Mistral
 
 ```
 ```
