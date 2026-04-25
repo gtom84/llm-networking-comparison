@@ -2,3 +2,6 @@ remote_theme: pages-themes/hacker@v0.2.0
 title: Network - LLM Comparison
 description: Comparison of LLMs with networking troubleshooting task
 markdown: kramdown
+plugins:
+- jekyll-remote-theme
+- jekyll-toc
