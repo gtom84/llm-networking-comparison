@@ -1,4 +1,4 @@
-remote_theme: pages-themes/solar-theme-jekyll
+remote_theme: pages-themes/midnight
 title: Network - LLM Comparison
 description: Comparison of LLMs with networking troubleshooting task
 plugins:
