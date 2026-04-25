@@ -27,28 +27,29 @@ The prompt was intentionally not overly specific to mimic real world prompts. It
 
 # Results
 
-| LLM Name | Score | Remarks |
-| --- | --- | --- | 
-| Qwen3.6-Max-Preview | 3 | Missed actual cause. Provided other plausible root causes. Lost points for non-plausible causes. |
-| Qwen3.6-27B | N/A | Found root cause in top 3 suspects. Provided other plausible root causes. |
-| Qwen3-Coder | 2 | Missed actual cause. Lost points for non-plausible root causes (Hairpinning/NAT). |
-| Gemini 3 Flash Preview | N/A | Found root cause as the 1st suspect. Provided other plausible root causes. | 
-| Gemma 4 31B IT | N/A | Found root cause as the 1st suspect. Provided other plausible root causes. | 
-| gpt-5.5 | N/A | Found root cause as the 1st suspect. Lost points for non-plausible root causes. | 
-| gpt-5.3-chat-latest | 3 | Missed actual cause. Provided other plausible root causes. Lost points for non-plausible causes. | 
-| gpt-5.3-codex | 2 | Missed actual cause. Lost points for non-plausible root causes. |
-| gpt-4.1-nano | 1 | Missed actual cause. Lost points for non-plausible root causes. |
-| gpt-5.4-mini | 2 | Missed actual cause. Lost points for non-plausible root causes. |
-| o1-pro | 0 | Missed actual cause. Lost points for non-plausible root causes. |
-| Sonet-4.6 | 4 | Missed actual cause. Provided other plausible root causes. |
-| Opus 4.7 | N/A | Found root cause as the 1st suspect. Provided other plausible root causes. | 
-| Grok Code Fast 1 | N/A | Found root cause in top 3 suspects. Lost points for non-plausible causes. |
-| Gwen3 Coder Next | 1 | Missed actual cause. Lost points for non-plausible root causes. |
-| LLama4 Maverick 17B | 1 | Missed actual cause. Lost points for non-plausible root causes. |
-| Nemotron 3 Super | 3 | Identified firewall (late). Lost points for non-plausible root causes. |
-| Mistral | 1 | Identified firewall (late). Lost points for non-plausible root causes. |
 
-# LLM responses
+| LLM Name | Score | Remarks |
+| :--- | :---: | :--- |
+| Qwen3.6-Max-Preview | 3 | Missed actual cause. Provided other plausible root causes. Lost points for non-plausible causes. |
+| Qwen3.6-27B 🥈| N/A | Found root cause in top 3 suspects. Provided other plausible root causes. |
+| Qwen3-Coder ⛔| 2 | Missed actual cause. Lost points for non-plausible root causes. |
+| Gemini 3 Flash Preview 🏆| N/A | Found root cause as the 1st suspect. Provided other plausible root causes. |
+| Gemma 4 31B IT 🏆 | N/A | Found root cause as the 1st suspect. Provided other plausible root causes. |
+| gpt-5.5 🏆| N/A | Found root cause as the 1st suspect. Lost points for non-plausible root causes. |
+| gpt-5.3-chat-latest | 3 | Missed actual cause. Provided other plausible root causes. Lost points for non-plausible causes. |
+| gpt-5.3-codex ⛔| 2 | Missed actual cause. Lost points for non-plausible root causes. |
+| gpt-4.1-nano ⛔| 1 | Missed actual cause. Lost points for non-plausible root causes. |
+| gpt-5.4-mini ⛔| 2 | Missed actual cause. Lost points for non-plausible root causes. |
+| o1-pro ⛔| 0 | Missed actual cause. Lost points for non-plausible root causes. |
+| Sonet-4.6 | 4 | Missed actual cause. Provided other plausible root causes. |
+| Opus 4.7 🏆| N/A | Found root cause as the 1st suspect. Provided other plausible root causes. |
+| Grok Code Fast 1 🥈| N/A | Found root cause in top 3 suspects. Lost points for non-plausible causes. |
+| Gwen3 Coder Next ⛔| 1 | Missed actual cause. Lost points for non-plausible root causes. |
+| LLama4 Maverick 17B ⛔| 1 | Missed actual cause. Lost points for non-plausible root causes. |
+| Nemotron 3 Super 🥉| 3 | Identified firewall (late). Lost points for non-plausible root causes. |
+| Mistral 🥉| 1 | Identified firewall (late). Lost points for non-plausible root causes. |
+
+# Full LLM responses
 
 ## Qwen3.6-Max-Preview
 
