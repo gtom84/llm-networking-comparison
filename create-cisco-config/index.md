@@ -1,4 +1,4 @@
-# Prompt
+# Prompt
 
 Create a working, fully functional production grade Cisco IOS-XE 17 configuration of a router ISR8000 which can be copy pasted into a production device.
 
@@ -28,19 +28,6 @@ Add +1 point for:
 Extra credit for identfying configuration issues, ie. IPv6 syslog server without any IPv6 routing, address, etc.
 
 # Result
-
-| Model | IP/VLAN | BGP/Traffic Eng. | OSPF | NAT | Shaping | Sec/AAA | Total |
-|:--- | :---: | :---: |:---: |:---: |:---: |:---: |:---: |
-| GPT-5.3-chat | 1 | 0.5 | 1 | 0 | 0 | 1 | 3.5 |
-| GPT-5.5 | 1 | 1 | 1 | 1 | 1 | 1 | 6.0 |
-| Opus 4.7 | 1 | 1 | 1 | 0 | 1 | 1 | 5.0 |
-| Qwen 3.6-Plus | 1 | 1 | 0.5 | 0 | 0 | 1 | 3.5 |
-| Gemini 3.1 Pro | 1 | 1 | 1 | 0 | 1 | 1 | 5.0 |
-| Gemma 4 31B IT | 1 | 1 | 1 | 0 | 0 | 1 | 4.0 |
-| Sonnet 4.6 | 1 | 1 | 1 | 1 | 1 | 1 | 6.0 |
-
-
-To evaluate these LLM responses, I have graded them based on the criteria provided. A "Production Grade" configuration for an ISR8000 (Catalyst 8000 series) requires more than just syntax; it requires correct traffic engineering to respect the Primary/Secondary WAN relationship and security to prevent the router from becoming an Open Transit AS.
 
 ## Score Summary Table
 
