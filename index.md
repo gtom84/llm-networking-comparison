@@ -1,4 +1,5 @@
 {:toc}
+{{ content | toc }}
 
 # Task (prompt)
 
