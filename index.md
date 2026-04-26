@@ -5,4 +5,4 @@
 - [Create production Cisco router config](create-cisco-config)
     - [Full configs](create-cisco-config/config-response.md) 
 - [Troubleshooting WAN](t-shoot-non-working-ping)
-
+- [Create a simple branch design](create-simple-lan-design)
