@@ -18,6 +18,8 @@ Management via SSH and local username, password.
 
 SW1 ports Gi0/23 and 24 are uplinks. Ports 0 to 10 are VLAN 100, ports 11 .. 15 are VLAN 105.
 
+---
+
 # Rating criteria
 
 The prompt left room was variance for the LLMs and it also had a few errors for LLMs to either find and point out or blindly implement.
@@ -29,6 +31,8 @@ RFC1918 is a problem for most LLMs except for GPT 5.5 who consistenly identifies
 Most LLMs corrected port numbering on 9300 but also most of them failed to add any management SVI on the switches.
 
 The most important question, was any of the designs *working* out of the box? Yes, only **gpt 5.5** produced copy/paste ready working configuration of a branch site.
+
+---
 
 # Results
 
@@ -43,6 +47,7 @@ The most important question, was any of the designs *working* out of the box? Ye
 | Gemma 4 31B IT | 0 | 0 | 1 | 1 | 0 | 5 | 7 | 
 
 ## gpt-5.3-chat
+
 - Missed port names on 9300
 - Missed IPAM errors
 - HSRP without tracking
@@ -51,32 +56,38 @@ The most important question, was any of the designs *working* out of the box? Ye
 - Didn't add mgmt IP on switches
 
 ## gpt-5.5
+
 - Fixed all errors planted in the prompt
 - Suggested HSRP design
 - Suggested stacking 9300
 - Left unused ports open
 
-## Opus 4.7
+## Opus 4.7
+
 - Fixed most errors
 - Missed NAT (surprising)
 - HSRP without tracking
 
-## Llama 4 Maverick
+## Llama 4 Maverick
+
 - Similar to gpt-5.3-chat
 
-## Gwen3.6-35B-A3B
+## Gwen3.6-35B-A3B
+
 - HSRP without tracking
 - Missed IPAM errors
 - Incorrect routing
 - Didn't add mgmt IP on switches
 - Messed up uplink ports on switches
 
-## Gemini 3.1 Pro
+## Gemini 3.1 Pro
+
 - HSRP with tracking
 - SVI for management on switches
 - HSRP design
 - Failed to identify IPAM errors and NAT
 
-## Gemma 4 31B IT 
+## Gemma 4 31B IT 
+
 - Nice surprise as the only model which came up with SVI and HSRP on 9300 + OSPF between routers and switches
 - Unfortunatelly failed in IPAM error identification, no NAT for RFC1918 range
