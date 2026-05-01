@@ -19,7 +19,7 @@
 
 # Task (prompt)
 
-I have prplOS clients in the lab connected to Cisco LAC and LNS. I can ping from prplOS to LAC but I can't ping between prplOS clients neither can I ping from LNS to any client. What could be the root cause?
+I have prplOS clients in the lab connected to Cisco LAC and LNS. I can ping from prplOS to LNS but I can't ping between prplOS clients neither can I ping from LNS to any client. What could be the root cause?
 
 ---
 
